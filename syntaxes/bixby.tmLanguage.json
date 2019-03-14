@@ -1,0 +1,32 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "bixby",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.bixby",
+				"match": "\\b(if|else-if|else|action|collect|type|input|min|max|output)\\b"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.bixby",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.bixby",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.bixby"
+}
