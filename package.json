@@ -2,7 +2,8 @@
   "name": "bixby",
   "displayName": "Bixby",
   "description": "Bixby Language extension",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "publisher": "dinoehooi",
   "enableProposedApi": true,
   "engines": {
     "vscode": "^1.31.0"
