@@ -55,51 +55,21 @@
     },
     "commands": [
       {
-        "command": "nodeDependencies.refreshEntry",
-        "title": "Refresh",
+        "category": "Bixby Tools",
+        "command": "bixby.commands.training.refresh",
+        "title": "Refresh Training Data",
         "icon": {
           "light": "resources/light/refresh.svg",
           "dark": "resources/dark/refresh.svg"
         }
-      },
-      {
-        "command": "nodeDependencies.addEntry",
-        "title": "Add"
-      },
-      {
-        "command": "nodeDependencies.editEntry",
-        "title": "Edit",
-        "icon": {
-          "light": "resources/light/edit.svg",
-          "dark": "resources/dark/edit.svg"
-        }
-      },
-      {
-        "command": "nodeDependencies.deleteEntry",
-        "title": "Delete"
       }
     ],
     "menus": {
       "view/title": [
         {
-          "command": "nodeDependencies.refreshEntry",
-          "when": "view == bixbyTools",
+          "command": "bixby.commands.training.refresh",
+          "when": "view == bixbyTrainings",
           "group": "navigation"
-        },
-        {
-          "command": "nodeDependencies.addEntry",
-          "when": "view == bixbyTools"
-        }
-      ],
-      "view/item/context": [
-        {
-          "command": "nodeDependencies.editEntry",
-          "when": "view == bixbyTools && viewItem == dependency",
-          "group": "inline"
-        },
-        {
-          "command": "nodeDependencies.deleteEntry",
-          "when": "view == bixbyTools && viewItem == dependency"
         }
       ]
     }
