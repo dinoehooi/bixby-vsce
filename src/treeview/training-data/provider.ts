@@ -9,6 +9,10 @@ export class TrainingDataProvider implements vscode.TreeDataProvider<TrainingIte
 	constructor(
 		private workspaceRoot: string
 	) {
+		const watcher: vscode.FileSystemWatcher = vscode.workspace.createFileSystemWatcher('**/*.training.bxb')
+		watcher.onDidChange(()=>{this.refresh()})
+		watcher.onDidCreate(()=>{this.refresh()})
+		watcher.onDidDelete(()=>{this.refresh()})
 	}
 
 	private parser = new TrainingDataParser(this.workspaceRoot)
