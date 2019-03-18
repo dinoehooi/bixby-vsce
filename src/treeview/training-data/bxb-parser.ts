@@ -72,7 +72,7 @@ class GoalToTrainingsMap extends Map<string, Training[]> {
 		super()
 		if (dir && this.pathExists(dir)) {
 			walkSync(dir, {
-				globs: ['training/*.training.bxb', 'training/*.training.6t'],
+				globs: ['training/*.training.{bxb,6t}'],
 				 directories: false,
 				 includeBasePath: true
 			}).forEach(filepath => {
