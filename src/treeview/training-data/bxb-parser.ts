@@ -70,7 +70,7 @@ export class TrainingDataParser {
 class GoalToTrainingsMap extends Map<string, Training[]> {
 	constructor(dir?: string) {
 		super()
-		if (dir && this.pathExists(dir)) {
+		if (this.pathExists(dir)) {
 			walkSync(dir, {
 				globs: ['training/*.training.bxb', 'training/*.training.6t'],
 				 directories: false,

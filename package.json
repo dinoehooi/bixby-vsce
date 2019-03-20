@@ -2,7 +2,7 @@
   "name": "bixby",
   "displayName": "Bixby",
   "description": "Bixby Language extension",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "dinoehooi",
   "enableProposedApi": true,
   "engines": {
@@ -12,7 +12,8 @@
     "Programming Languages"
   ],
   "activationEvents": [
-    "onView:bixbyTrainings"
+    "onView:bixbyTrainings",
+    "workspaceContains:**/*.bxb"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -62,6 +63,30 @@
           "light": "resources/light/refresh.svg",
           "dark": "resources/dark/refresh.svg"
         }
+      },
+      {
+        "category": "Bixby Tools",
+        "command": "bixby.commands.training.tag-value",
+        "title": "Tag a value"
+      },
+      {
+        "category": "Bixby Tools",
+        "command": "bixby.commands.training.new-training",
+        "title": "Add a training"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "bixby.commands.training.tag-value",
+        "key": "ctrl+shift+t",
+        "mac": "cmd+shift+t",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "bixby.commands.training.new-training",
+        "key": "ctrl+shift+a",
+        "mac": "cmd+shift+a",
+        "when": "editorTextFocus"
       }
     ],
     "menus": {
@@ -70,6 +95,10 @@
           "command": "bixby.commands.training.refresh",
           "when": "view == bixbyTrainings",
           "group": "navigation"
+        },
+        {
+          "command": "bixby.commands.training.tag-value",
+          "when": "view == bixbyTrainings"
         }
       ]
     }
