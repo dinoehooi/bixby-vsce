@@ -2,7 +2,7 @@
   "name": "bixby",
   "displayName": "Bixby",
   "description": "Bixby Language extension",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "publisher": "dinoehooi",
   "enableProposedApi": true,
   "engines": {
@@ -73,6 +73,11 @@
         "category": "Bixby Tools",
         "command": "bixby.commands.training.new-training",
         "title": "Add a training"
+      },
+      {
+        "category": "Bixby Tools",
+        "command": "bixby.commands.training.regroup-file",
+        "title": "Regroup training files by goal"
       }
     ],
     "keybindings": [
@@ -99,6 +104,10 @@
         {
           "command": "bixby.commands.training.tag-value",
           "when": "view == bixbyTrainings"
+        },
+        {
+          "command": "bixby.commands.training.regroup-file",
+          "when": "view == bixbyTrainings"
         }
       ]
     }
@@ -116,6 +125,8 @@
     "vscode": "^1.1.22"
   },
   "dependencies": {
+    "@types/jsonpath": "^0.2.0",
+    "jsonpath": "^1.0.1",
     "walk-sync": "^1.1.3"
   }
 }

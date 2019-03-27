@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import {TrainingDataParser, Training} from './bxb-parser'
+import {TrainingManager, Training} from '../training/training'
 
 export class TrainingDataProvider implements vscode.TreeDataProvider<TrainingItem> {
 
@@ -15,9 +15,10 @@ export class TrainingDataProvider implements vscode.TreeDataProvider<TrainingIte
 		watcher.onDidDelete(()=>{this.refresh()})
 	}
 
-	private parser = new TrainingDataParser(this.workspaceRoot)
+	private manager = new TrainingManager(this.workspaceRoot)
 
 	refresh(): void {
+		this.manager.clearCache()
 		this._onDidChangeTreeData.fire()
 	}
 
@@ -32,7 +33,7 @@ export class TrainingDataProvider implements vscode.TreeDataProvider<TrainingIte
 		}
 		if (!element) {
 			return new Promise(resolve=>{
-				const targets = this.parser.getTargetList()
+				const targets = this.manager.getTargetList()
 				if (targets.length == 0) {
 					vscode.window.showInformationMessage('no capsule.bxb file or no target is declared')
 				}
@@ -43,19 +44,19 @@ export class TrainingDataProvider implements vscode.TreeDataProvider<TrainingIte
 			})
 		} else if (element.type == TrainingItemType.Target) {
 			return new Promise(resolve=>{
-				const goals: string[] = this.parser.getGoalList(element.label)
+				const goals: string[] = this.manager.getGoalList(element.label)
 				if (goals.length == 0) {
 					vscode.window.showInformationMessage('no training data in this target')
 				}
 				resolve(goals.map(goal=>{
-					const count = this.parser.getTrainingList(element.label, goal).length
+					const count = this.manager.getTrainingList(element.label, goal).length
 					return new TrainingItem(goal, vscode.TreeItemCollapsibleState.Collapsed,
 						TrainingItemType.Goal, element.label, null, `(${count})`)
 				}))
 			}) 
 		} else if (element.type == TrainingItemType.Goal) {
 			return new Promise(resolve=>{
-				const trainings: Training[] = this.parser.getTrainingList(element.target, element.label)
+				const trainings: Training[] = this.manager.getTrainingList(element.target, element.label)
 				if (trainings.length == 0) {
 					vscode.window.showInformationMessage('no training data in this goal')
 				}

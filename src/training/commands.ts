@@ -1,5 +1,6 @@
 import * as vscode from 'vscode'
 import * as crypto from 'crypto'
+import {TrainingManager, Training} from './training'
 
 export class TrainingCommands {
 	static tagValue(editor: vscode.TextEditor): void {
@@ -36,6 +37,11 @@ export class TrainingCommands {
 		}).then(()=>{
 			setPosition(editor, pos.line + 3, 0)
 		})
+	}
+
+	static regroupTrainingFilesByGoal(): void {
+		const tm: TrainingManager = new TrainingManager(vscode.workspace.rootPath)
+		tm.regroupTrainingFilesByGoal()
 	}
 }
 

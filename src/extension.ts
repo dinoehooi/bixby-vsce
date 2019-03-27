@@ -1,7 +1,7 @@
 'use strict'
 
 import * as vscode from 'vscode'
-import {TrainingDataProvider} from './treeview/training-data/provider'
+import {TrainingDataProvider} from './treeview/training-data-provider'
 import {TrainingCommands} from './training/commands'
 
 export function activate(context: vscode.ExtensionContext) {
@@ -13,4 +13,6 @@ export function activate(context: vscode.ExtensionContext) {
 		() => TrainingCommands.tagValue(vscode.window.activeTextEditor))
 	vscode.commands.registerCommand('bixby.commands.training.new-training',
 		() => TrainingCommands.newTraining(vscode.window.activeTextEditor))
+	vscode.commands.registerCommand('bixby.commands.training.regroup-file',
+	  () => TrainingCommands.regroupTrainingFilesByGoal() )
 }
