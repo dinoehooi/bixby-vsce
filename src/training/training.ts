@@ -12,7 +12,7 @@ export class TrainingManager {
 	}
 
 	public clearCache(): void {
-		this.trainingsPerDir = {} as TrainingsPerDir
+		this.trainingsPerDir = new TrainingsPerDir()
 	}
 
 	public getTargetList(): string[] {
