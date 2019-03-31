@@ -1,6 +1,7 @@
 import * as vscode from 'vscode'
 import * as crypto from 'crypto'
-import {TrainingManager, Training} from './training'
+import {TrainingManager} from './training'
+import { DuplicationChecker } from './duplication-checker';
 
 export class TrainingCommands {
 	static tagValue(editor: vscode.TextEditor): void {
@@ -40,8 +41,14 @@ export class TrainingCommands {
 	}
 
 	static regroupTrainingFilesByGoal(): void {
-		const tm: TrainingManager = new TrainingManager(vscode.workspace.rootPath)
+		const tm: TrainingManager = TrainingManager.getInstance(vscode.workspace.rootPath)
 		tm.regroupTrainingFilesByGoal()
+	}
+
+	static checkDuplications(outputChannel: vscode.OutputChannel): void {
+		outputChannel.clear()
+		outputChannel.show()
+		DuplicationChecker.run(vscode.workspace.rootPath, outputChannel)
 	}
 }
 

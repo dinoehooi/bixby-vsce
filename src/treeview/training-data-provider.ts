@@ -15,7 +15,7 @@ export class TrainingDataProvider implements vscode.TreeDataProvider<TrainingIte
 		watcher.onDidDelete(()=>{this.refresh()})
 	}
 
-	private manager = new TrainingManager(this.workspaceRoot)
+	private manager = TrainingManager.getInstance(this.workspaceRoot)
 
 	refresh(): void {
 		this.manager.clearCache()
@@ -84,10 +84,17 @@ export class TrainingItem extends vscode.TreeItem {
 		public readonly target?: string,
 		private training?: Training,
 		public readonly description?: string,
-		public readonly command?: vscode.Command
+		//public readonly command?: vscode.Command
 	) {
 		super(label, collapsibleState)
 		if (training) this.description = training.alignedNL
+		if (training) {
+			this.command = {
+				title: 'goto',
+				command: 'bixby.commands.training.goto',
+				arguments: [training.filepath, training.line]
+			} as vscode.Command
+		}
 	}
 
 	get tooltip(): string {
@@ -98,4 +105,3 @@ export class TrainingItem extends vscode.TreeItem {
 	// 	return this.training ? this.training.alignedNL : ''
 	// }
 }
-

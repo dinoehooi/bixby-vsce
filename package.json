@@ -2,7 +2,7 @@
   "name": "bixby",
   "displayName": "Bixby",
   "description": "Bixby Language extension",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "publisher": "dinoehooi",
   "enableProposedApi": true,
   "engines": {
@@ -78,6 +78,16 @@
         "category": "Bixby Tools",
         "command": "bixby.commands.training.regroup-file",
         "title": "Regroup training files by goal"
+      },
+      {
+        "category": "Bixby Tools",
+        "command": "bixby.commands.training.check-duplications",
+        "title": "Check training duplications"
+      },
+      {
+        "category": "Bixby Tools",
+        "command": "bixby.commands.training.goto",
+        "title": "Goto training file"
       }
     ],
     "keybindings": [
@@ -107,6 +117,10 @@
         },
         {
           "command": "bixby.commands.training.regroup-file",
+          "when": "view == bixbyTrainings"
+        },
+        {
+          "command": "bixby.commands.training.check-duplications",
           "when": "view == bixbyTrainings"
         }
       ]

@@ -5,8 +5,16 @@ import * as jp from 'jsonpath'
 
 export class TrainingManager {
 	private trainingsPerDir: TrainingsPerDir = new TrainingsPerDir()
+	private static instance: TrainingManager = undefined
 
-	constructor(
+	public static getInstance(workspaceRoot: string): TrainingManager {
+		if (!TrainingManager.instance) {
+			TrainingManager.instance = new TrainingManager(workspaceRoot)
+		}
+		return TrainingManager.instance
+	}
+
+	private constructor(
 		private workspaceRoot: string
 		) {
 	}
@@ -38,10 +46,15 @@ export class TrainingManager {
 		return Array.from(goals).sort((a,b) => a.localeCompare(b))
 	}
 
-	public getTrainingList(target: string, goal: string): Training[] {
+	public getTrainingList(target: string, goal?: string): Training[] {
 		const trainings: Training[] = []
 		this.getTrainingDirsForTarget(target).forEach(subdir => {
-			trainings.push(...jp.query(this.trainingsPerDir.get(subdir), `$[?(@.goal=="${goal}")]`))
+			if (goal) {
+				trainings.push(...jp.query(this.trainingsPerDir.get(subdir), `$[?(@.goal=="${goal}")]`))
+			} else {
+				const t = this.trainingsPerDir.get(subdir)
+				if (t) trainings.push(...t)
+			}
 		})
 		return trainings.sort((a,b) => a.utterance.localeCompare(b.utterance))
 	}
@@ -93,12 +106,13 @@ export class TrainingManager {
 		]
 	}
 
-	private readAllTrainings(): void {
+	public readAllTrainings(): void {
 		walkSync(this.workspaceRoot, {
 			globs: ['resources/*'],
 			 directories: true,
 			 includeBasePath: false
 		}).forEach(subdir => {
+			if (subdir.endsWith('/')) subdir = subdir.substr(0, subdir.length-1)
 			if (!this.trainingsPerDir.get(subdir))
 				this.trainingsPerDir.set(subdir, this.parseTrainingsFromDir(subdir)) 
 		})
