@@ -2,6 +2,7 @@
   "name": "bixby",
   "displayName": "Bixby",
   "description": "Bixby Language extension",
+  "repository": {"url": "https://github.com/dinoehooi/bixby-vsce.git"},
   "version": "0.5.0",
   "publisher": "dinoehooi",
   "enableProposedApi": true,
