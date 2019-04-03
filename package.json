@@ -2,7 +2,7 @@
   "name": "bixby",
   "displayName": "Bixby",
   "description": "Bixby Language extension",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "publisher": "dinoehooi",
   "enableProposedApi": true,
   "engines": {
@@ -133,10 +133,10 @@
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "devDependencies": {
-    "@types/node": "*",
-    "tslint": "^5.11.0",
+    "@types/node": "^11.13.0",
+    "tslint": "^5.15.0",
     "typescript": "^2.1.4",
-    "vscode": "^1.1.22"
+    "vscode": "^1.1.33"
   },
   "dependencies": {
     "@types/jsonpath": "^0.2.0",
