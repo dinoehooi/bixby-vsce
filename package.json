@@ -2,10 +2,11 @@
   "name": "bixby",
   "displayName": "Bixby",
   "description": "Bixby Language extension",
+  "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "url": "https://github.com/dinoehooi/bixby-vsce.git"
   },
-  "version": "0.5.0",
+  "version": "0.5.1",
   "publisher": "dinoehooi",
   "enableProposedApi": false,
   "engines": {
@@ -130,17 +131,16 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "webpack --mode production",
-    "compile": "webpack --mode none",
-    "watch": "webpack --mode none --watch",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "test-compile": "tsc -p ./"
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install" 
   },
   "devDependencies": {
     "@types/node": "^11.13.0",
     "ts-loader": "^5.3.3",
     "tslint": "^5.15.0",
-    "typescript": "^2.1.4",
+    "typescript": "^3.4.1",
     "vscode": "^1.1.33",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"
