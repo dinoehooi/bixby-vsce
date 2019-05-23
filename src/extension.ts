@@ -28,6 +28,8 @@ export function activate(context: vscode.ExtensionContext) {
 					{selection: new vscode.Selection(line, 0, line, 0)})
 			})
 		})
+	vscode.commands.registerCommand('bixby.commands.training.search-tagged-value',
+		() => TrainingCommands.searchTaggedValueByType(outputChannel))
 }
 
 export function deactivate(): void {

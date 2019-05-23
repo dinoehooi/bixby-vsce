@@ -6,7 +6,7 @@
   "repository": {
     "url": "https://github.com/dinoehooi/bixby-vsce.git"
   },
-  "version": "0.5.1",
+  "version": "0.5.2",
   "publisher": "dinoehooi",
   "enableProposedApi": false,
   "engines": {
@@ -92,6 +92,11 @@
         "category": "Bixby Tools",
         "command": "bixby.commands.training.goto",
         "title": "Goto training file"
+      },
+      {
+        "category": "Bixby Tools",
+        "command": "bixby.commands.training.search-tagged-value",
+        "title": "Search tagged value by type"
       }
     ],
     "keybindings": [
@@ -125,6 +130,10 @@
         },
         {
           "command": "bixby.commands.training.check-duplications",
+          "when": "view == bixbyTrainings"
+        },
+        {
+          "command": "bixby.commands.training.search-tagged-value",
           "when": "view == bixbyTrainings"
         }
       ]

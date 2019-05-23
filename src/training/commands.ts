@@ -50,6 +50,21 @@ export class TrainingCommands {
 		outputChannel.show()
 		DuplicationChecker.run(vscode.workspace.rootPath, outputChannel)
 	}
+
+	static searchTaggedValueByType(outputChannel: vscode.OutputChannel): void {
+		vscode.window.showInputBox({
+			ignoreFocusOut: true,
+			placeHolder: 'value type to search'
+		}).then((valueType: string) => {
+			outputChannel.clear()
+			outputChannel.show()
+			outputChannel.appendLine(`Searching values tagged with [v:${valueType}] ...`)
+			const tm: TrainingManager = TrainingManager.getInstance(vscode.workspace.rootPath)
+			tm.readAllTrainings()
+			tm.searchTaggedValueByType(valueType).forEach(value => { outputChannel.appendLine(value) })
+			outputChannel.appendLine('--- end of values ---')
+		})
+	}
 }
 
 function setPosition(editor: vscode.TextEditor, line: number, char: number): void {

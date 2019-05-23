@@ -118,6 +118,22 @@ export class TrainingManager {
 		})
 	}
 
+	public searchTaggedValueByType(searchType: string): string[] {
+		const valueSet: Set<string> = new Set<string>()
+		searchType = searchType.replace('.', '\\.')
+		const re: RegExp = new RegExp(`\\(([^\\(]+)\\)\\[v:${searchType}\\]`, 'g')
+		// const re = /\(([^\(]+)\)\[v:iotHelper.DeviceName\]/g
+		Array.from(this.trainingsPerDir.values()).forEach(trainings => {
+			trainings.forEach(training => {
+				let matched: string[]
+				while ((matched = re.exec(training.alignedNL)) !== null) {
+					valueSet.add(matched[1])
+				}
+			})
+		})
+		return Array.from(valueSet).sort((a,b) => a && a.localeCompare(b))
+	}
+
 	private parseTrainingsFromDir(subdir: string): Training[] {
 		const trainings: Training[] = []
 		const basePath = path.join(this.workspaceRoot, subdir)
