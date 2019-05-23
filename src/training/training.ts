@@ -171,7 +171,7 @@ export class TrainingManager {
 				alignedNL = matched[1].trim()
 				matched = /\[g:[^\]]+\]/.exec(alignedNL)
 				goal = matched[0]
-				utterance = alignedNL.replace(/\[[^\]]+]|\(|\)/g, '').trim()
+				utterance = alignedNL.replace(/\[[^\]]+]|[\(\){}]/g, '').trim()
 				break
 			}
 		}
