@@ -43,7 +43,7 @@ export class TrainingManager {
 				(goal: string) => goals.add(goal)
 			)
 		})
-		return Array.from(goals).sort((a,b) => a.localeCompare(b))
+		return Array.from(goals).sort((a,b) => a && a.localeCompare(b))
 	}
 
 	public getTrainingList(target: string, goal?: string): Training[] {
@@ -56,7 +56,7 @@ export class TrainingManager {
 				if (t) trainings.push(...t)
 			}
 		})
-		return trainings.sort((a,b) => a.utterance.localeCompare(b.utterance))
+		return trainings.sort((a,b) => a.utterance && a.utterance.localeCompare(b.utterance))
 	}
 
 	public regroupTrainingFilesByGoal() {
