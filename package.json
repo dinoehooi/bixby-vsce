@@ -21,19 +21,6 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "languages": [
-      {
-        "id": "bixby",
-        "aliases": [
-          "Bixby",
-          "bixby"
-        ],
-        "extensions": [
-          "bxb"
-        ],
-        "configuration": "./language-configuration.json"
-      }
-    ],
     "grammars": [
       {
         "language": "bixby",
