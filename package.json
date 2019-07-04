@@ -6,7 +6,7 @@
   "repository": {
     "url": "https://github.com/dinoehooi/bixby-vsce.git"
   },
-  "version": "0.5.2",
+  "version": "0.5.3",
   "publisher": "dinoehooi",
   "enableProposedApi": false,
   "engines": {
@@ -21,13 +21,6 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "grammars": [
-      {
-        "language": "bixby",
-        "scopeName": "source.bixby",
-        "path": "./syntaxes/bixby.tmLanguage.json"
-      }
-    ],
     "viewsContainers": {
       "activitybar": [
         {
@@ -62,11 +55,6 @@
       },
       {
         "category": "Bixby Tools",
-        "command": "bixby.commands.training.new-training",
-        "title": "Add a training"
-      },
-      {
-        "category": "Bixby Tools",
         "command": "bixby.commands.training.regroup-file",
         "title": "Regroup training files by goal"
       },
@@ -82,8 +70,13 @@
       },
       {
         "category": "Bixby Tools",
-        "command": "bixby.commands.training.search-tagged-value",
-        "title": "Search tagged value by type"
+        "command": "bixby.commands.training.gather-tagged-value",
+        "title": "Gather tagged values by type"
+      },
+      {
+        "category": "Bixby Tools",
+        "command": "bixby.commands.training.add-a-bunch-of-training-data",
+        "title": "Add a bunch of training data"
       }
     ],
     "keybindings": [
@@ -94,7 +87,7 @@
         "when": "editorTextFocus"
       },
       {
-        "command": "bixby.commands.training.new-training",
+        "command": "bixby.commands.training.add-a-bunch-of-training-data",
         "key": "ctrl+shift+a",
         "mac": "cmd+shift+a",
         "when": "editorTextFocus"
@@ -120,7 +113,11 @@
           "when": "view == bixbyTrainings"
         },
         {
-          "command": "bixby.commands.training.search-tagged-value",
+          "command": "bixby.commands.training.gather-tagged-value",
+          "when": "view == bixbyTrainings"
+        },
+        {
+          "command": "bixby.commands.training.add-a-bunch-of-training-data",
           "when": "view == bixbyTrainings"
         }
       ]

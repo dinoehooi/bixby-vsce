@@ -14,8 +14,6 @@ export function activate(context: vscode.ExtensionContext) {
 		() => trainingDataProvider.refresh())
 	vscode.commands.registerCommand('bixby.commands.training.tag-value',
 		() => TrainingCommands.tagValue(vscode.window.activeTextEditor))
-	vscode.commands.registerCommand('bixby.commands.training.new-training',
-		() => TrainingCommands.newTraining(vscode.window.activeTextEditor))
 	vscode.commands.registerCommand('bixby.commands.training.regroup-file',
 		() => TrainingCommands.regroupTrainingFilesByGoal() )
 	vscode.commands.registerCommand('bixby.commands.training.check-duplications',
@@ -28,8 +26,11 @@ export function activate(context: vscode.ExtensionContext) {
 					{selection: new vscode.Selection(line, 0, line, 0)})
 			})
 		})
-	vscode.commands.registerCommand('bixby.commands.training.search-tagged-value',
-		() => TrainingCommands.searchTaggedValueByType(outputChannel))
+	vscode.commands.registerCommand('bixby.commands.training.gather-tagged-value',
+		() => TrainingCommands.gatherTaggedValueByType(outputChannel))
+	vscode.commands.registerCommand('bixby.commands.training.add-a-bunch-of-training-data',
+		() => TrainingCommands.addBunchOfTrainings(vscode.window.activeTextEditor))
+
 }
 
 export function deactivate(): void {

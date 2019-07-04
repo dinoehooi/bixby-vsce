@@ -118,7 +118,7 @@ export class TrainingManager {
 		})
 	}
 
-	public searchTaggedValueByType(searchType: string): string[] {
+	public gatherTaggedValueByType(searchType: string): string[] {
 		const valueSet: Set<string> = new Set<string>()
 		searchType = searchType.replace('.', '\\.')
 		const re: RegExp = new RegExp(`\\(([^\\(]+)\\)\\[v:${searchType}\\]`, 'g')

@@ -25,18 +25,28 @@ export class TrainingCommands {
 		}
 	}
 
-	static newTraining(editor: vscode.TextEditor): void {
-		const line:vscode.TextLine = editor.document.lineAt(editor.selection.active)
-		const tid = crypto.randomBytes(100).toString('base64')
-			.replace(/[^a-zA-Z0-9]/g, '').toLowerCase().substring(0, 25)
-		const utterance = line.text.trim()
-		const pos = editor.selection.active
-		editor.edit(builder=>{
-			const lineRange = new vscode.Range(pos.with({character:0}), pos.with({character:line.text.length}))
-			builder.replace(lineRange,
-				`train (t-${tid}) {\n  utterance ("${utterance}")\n}`)
-		}).then(()=>{
-			setPosition(editor, pos.line + 3, 0)
+	static addBunchOfTrainings(editor: vscode.TextEditor): void {
+		const start = editor.selection.start.line
+		let end = editor.selection.end.line
+		end = start == end || editor.selection.end.character != 0 ? end : end - 1
+		const indices = Array.from({length: end - start + 1}, (v, k) => k + start)
+		const lines: string[] = indices.map(idx => editor.document.lineAt(idx).text.trim())
+		const trainings = lines.map(line => {
+			const tid = crypto.randomBytes(100).toString('base64')
+				.replace(/[^a-zA-Z0-9]/g, '').toLowerCase().substring(0, 25)
+			return `train (t-${tid}) {\n  utterance ("${line}")\n}`
+		}).join('\n')
+
+		const endLength = editor.document.lineAt(end).text.length
+		editor.edit(builder => {
+			const lineRange = new vscode.Range(
+				new vscode.Position(start, 0),
+				new vscode.Position(end, endLength)
+			)
+			builder.replace(lineRange, trainings)
+		}).then(() => {
+			// set position to the next line
+			setPosition(editor, end + (end - start + 1) * 2 + 1, 0)
 		})
 	}
 
@@ -51,17 +61,17 @@ export class TrainingCommands {
 		DuplicationChecker.run(vscode.workspace.rootPath, outputChannel)
 	}
 
-	static searchTaggedValueByType(outputChannel: vscode.OutputChannel): void {
+	static gatherTaggedValueByType(outputChannel: vscode.OutputChannel): void {
 		vscode.window.showInputBox({
 			ignoreFocusOut: true,
 			placeHolder: 'value type to search'
 		}).then((valueType: string) => {
 			outputChannel.clear()
 			outputChannel.show()
-			outputChannel.appendLine(`Searching values tagged with [v:${valueType}] ...`)
+			outputChannel.appendLine(`Gathering values tagged with [v:${valueType}] and then removing duplicate values...`)
 			const tm: TrainingManager = TrainingManager.getInstance(vscode.workspace.rootPath)
 			tm.readAllTrainings()
-			tm.searchTaggedValueByType(valueType).forEach(value => { outputChannel.appendLine(value) })
+			tm.gatherTaggedValueByType(valueType).forEach(value => { outputChannel.appendLine(value) })
 			outputChannel.appendLine('--- end of values ---')
 		})
 	}
