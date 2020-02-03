@@ -8,11 +8,12 @@ export class DuplicationChecker {
 		manager.getTargetList().forEach(target => {
 			const map: Map<string, Training[]> = new Map
 			manager.getTrainingList(target).forEach(training => {
-				const array = map.get(training.utterance)
+				const key = training.goal.includes(':prompt') ? training.goal + training.utterance : training.utterance
+				const array = map.get(key)
 				if (array) {
 					array.push(training)
 				} else {
-					map.set(training.utterance, [training])
+					map.set(key, [training])
 				}
 			})
 

@@ -33,3 +33,8 @@ VS Code
 ### 0.5.3
 - Remove the contribute definition of a language
 - Support to add a bunch of new training data
+
+### 0.5.4
+- Node module update
+- Improve the logic checking training duplication
+- 
