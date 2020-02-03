@@ -6,7 +6,7 @@
   "repository": {
     "url": "https://github.com/dinoehooi/bixby-vsce.git"
   },
-  "version": "0.5.3",
+  "version": "0.5.4",
   "publisher": "dinoehooi",
   "enableProposedApi": false,
   "engines": {
@@ -130,13 +130,13 @@
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "devDependencies": {
-    "@types/node": "^11.13.17",
+    "@types/node": "^11.15.5",
     "ts-loader": "^5.4.5",
-    "tslint": "^5.18.0",
-    "typescript": "^3.5.2",
-    "vscode": "^1.1.35",
-    "webpack": "^4.35.2",
-    "webpack-cli": "^3.3.5"
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.5",
+    "vscode": "^1.1.36",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
     "@types/jsonpath": "^0.2.0",
